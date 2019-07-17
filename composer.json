@@ -1,5 +1,8 @@
 {
     "name": "misatotremor/case-bundle",
+    "replace": {
+        "avro/case-bundle": "*"
+    },
     "type": "symfony-bundle",
     "description": "Symfony Case Converter Bundle",
     "keywords": ["pascal", "title", "camel", "converter"],
