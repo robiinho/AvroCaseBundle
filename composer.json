@@ -1,9 +1,9 @@
 {
-    "name": "avro/case-bundle2",
+    "name": "misatotremor/case-bundle",
     "type": "symfony-bundle",
     "description": "Symfony Case Converter Bundle",
     "keywords": ["pascal", "title", "camel", "converter"],
-    "homepage": "http://github.com/jdewit/AvroCaseBundle",
+    "homepage": "http://github.com/MisatoTremor/AvroCaseBundle",
     "license": "MIT",
     "authors": [
         {

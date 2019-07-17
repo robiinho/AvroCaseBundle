@@ -4,6 +4,8 @@ Convert strings or strings in arrays to different case formats.
 
 Supports: camelCase, PascalCase, Title Case, and underscore_case.
 
+This is a fork of jdewits [original code](https://github.com/jdewit/bootstrap-confirmation).
+
 Installation
 ------------
 This bundle is listed on packagist.
@@ -11,7 +13,7 @@ This bundle is listed on packagist.
 Simply add it to your apps composer.json file
 
 ```json
-    "avro/case-bundle2": "^0.4.0"
+    "misatotremor/case-bundle": "^0.4.0"
 ```
 
 Enable the bundle in config/bundles.php:
