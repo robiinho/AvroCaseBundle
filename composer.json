@@ -30,10 +30,10 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^7.5 || ^8.0 || ^9.3",
-        "symfony/config": "^4.0|^5.0",
-        "symfony/dependency-injection": "^4.0|^5.0",
-        "symfony/http-kernel": "^4.0|^5.0",
-        "symfony/phpunit-bridge": "^4.0.5|^5.0"
+        "symfony/config": "^4.0|^5.0|^6.0",
+        "symfony/dependency-injection": "^4.0|^5.0|^6.0",
+        "symfony/http-kernel": "^4.0|^5.0|^6.0",
+        "symfony/phpunit-bridge": "^4.0.5|^5.0|^6.0"
     },
     "autoload": {
         "psr-4": { "Avro\\CaseBundle\\": "" }

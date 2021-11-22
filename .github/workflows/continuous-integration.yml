@@ -48,6 +48,12 @@ jobs:
                         php-version: "8.0"
                         symfony-deprecations-helper: "weak"
 
+                    # Test against latest Symfony 6.x dev
+                    -   symfony-require: "6.*"
+                        dependencies: "highest"
+                        php-version: "8.0"
+                        symfony-deprecations-helper: "weak"
+
                     # Test against latest Symfony dev
                     -   php-version: "8.1"
                         dependencies: "highest"
