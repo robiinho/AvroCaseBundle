@@ -1,4 +1,4 @@
-AvroCaseBundle [![Build Status](https://github.com/MisatoTremor/AvroCaseBundle/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/MisatoTremor/AvroCaseBundle)
+AvroCaseBundle [![Build Status](https://github.com/MisatoTremor/AvroCaseBundle/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/MisatoTremor/AvroCaseBundle) [![codecov](https://codecov.io/gh/MisatoTremor/AvroCaseBundle/branch/1.0.x/graph/badge.svg?token=6MSH5913H0)](https://codecov.io/gh/MisatoTremor/AvroCaseBundle)
 --------------
 Convert strings or strings in arrays to different case formats.
 
