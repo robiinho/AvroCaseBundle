@@ -1,4 +1,4 @@
-AvroCaseBundle [![Build Status](https://travis-ci.org/MisatoTremor/AvroCaseBundle.png?branch=master)](https://travis-ci.org/MisatoTremor/AvroCaseBundle)
+AvroCaseBundle [![Build Status](https://github.com/MisatoTremor/AvroCaseBundle/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/MisatoTremor/AvroCaseBundle)
 --------------
 Convert strings or strings in arrays to different case formats.
 
@@ -10,16 +10,23 @@ Installation
 ------------
 This bundle is listed on packagist.
 
-Simply add it to your apps composer.json file
+Download the bundle
 
-```json
-    "misatotremor/case-bundle": "^0.4.0"
+```shell
+$ composer require misatotremor/case-bundle
 ```
 
-Enable the bundle in config/bundles.php:
+Enable the bundle
 
 ```php
+<?php
+// config/bundles.php
+
+return [
+    // ...
     Avro\CaseBundle\AvroCaseBundle::class => ['all' => true],
+    // ...
+];
 ```
 
 Configuration
@@ -36,6 +43,7 @@ avro_case:
 Usage
 -----
 ```php
+<?php
 use Avro\CaseBundle\Util\CaseConverter;
 
 class SomeClass
