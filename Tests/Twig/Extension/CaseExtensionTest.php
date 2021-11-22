@@ -8,16 +8,18 @@
 namespace Avro\CaseBundle\Tests\Twig\Extension;
 
 use Avro\CaseBundle\Twig\Extension\CaseExtension;
+use PHPUnit\Framework\TestCase;
+use Twig\TwigFilter;
 
 /**
  * Test CaseExtension Class.
  *
  * @author Joris de Wit <joris.w.dewit@gmail.com>
  */
-class CaseExtensionTest extends \PHPUnit_Framework_TestCase
+class CaseExtensionTest extends TestCase
 {
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|\Avro\CaseBundle\Util\CaseConverter
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Avro\CaseBundle\Util\CaseConverter
      */
     protected $converter;
     /**
@@ -25,7 +27,7 @@ class CaseExtensionTest extends \PHPUnit_Framework_TestCase
      */
     protected $extension;
 
-    public function setup()
+    public function setup(): void
     {
         $this->converter = $this->createMock('Avro\CaseBundle\Util\CaseConverter');
         $this->extension = new CaseExtension($this->converter);
@@ -45,12 +47,12 @@ class CaseExtensionTest extends \PHPUnit_Framework_TestCase
     public function testGetFilters()
     {
         $functions = $this->extension->getFilters();
-        $this->assertContainsOnly('\Twig_SimpleFilter', $functions);
+        $this->assertContainsOnly(TwigFilter::class, $functions);
     }
 
     public function testCamelCase()
     {
-        $this->converter->expects($this->any())
+        $this->converter
             ->method('toCamelCase')
             ->willReturn('camelCase');
         $this->assertEquals(
@@ -61,9 +63,9 @@ class CaseExtensionTest extends \PHPUnit_Framework_TestCase
 
     public function testPascalCase()
     {
-        $this->converter->expects($this->any())
+        $this->converter
             ->method('toPascalCase')
-            ->will($this->returnValue('PascalCase'));
+            ->willReturn('PascalCase');
         $this->assertEquals(
             'PascalCase',
             $this->extension->toPascalCase('pascal_case')
@@ -72,9 +74,9 @@ class CaseExtensionTest extends \PHPUnit_Framework_TestCase
 
     public function testTitleCase()
     {
-        $this->converter->expects($this->any())
+        $this->converter
             ->method('toTitleCase')
-            ->will($this->returnValue('Title Case'));
+            ->willReturn('Title Case');
         $this->assertEquals(
             'Title Case',
             $this->extension->toTitleCase('title_case')
@@ -83,9 +85,9 @@ class CaseExtensionTest extends \PHPUnit_Framework_TestCase
 
     public function testUnderscoreCase()
     {
-        $this->converter->expects($this->any())
+        $this->converter
             ->method('toUnderscoreCase')
-            ->will($this->returnValue('underscore_case'));
+            ->willReturn('underscore_case');
         $this->assertEquals(
             'underscore_case',
             $this->extension->toUnderscoreCase('underscore case')

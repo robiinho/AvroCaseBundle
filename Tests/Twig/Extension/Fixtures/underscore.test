@@ -1,0 +1,10 @@
+--TEST--
+"underscore" filter
+--TEMPLATE--
+{{ 'UNDERSCORECASEFORMAT'|underscore }}
+{{ 'Underscore Case Format'|underscore }}
+--DATA--
+return [];
+--EXPECT--
+u_n_d_e_r_s_c_o_r_e_c_a_s_e_f_o_r_m_a_t
+underscore_case_format

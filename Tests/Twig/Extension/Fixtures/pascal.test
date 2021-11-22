@@ -1,0 +1,10 @@
+--TEST--
+"pascal" filter
+--TEMPLATE--
+{{ 'PASCALCASEFORMAT'|pascal }}
+{{ 'Pascal Case Format'|pascal }}
+--DATA--
+return [];
+--EXPECT--
+PASCALCASEFORMAT
+PascalCaseFormat

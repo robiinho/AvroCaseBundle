@@ -8,163 +8,151 @@
 namespace Avro\CaseBundle\Tests\Util;
 
 use Avro\CaseBundle\Util\CaseConverter;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
+use stdClass;
 
-class CaseConverterTest extends PHPUnit_Framework_TestCase
+class CaseConverterTest extends TestCase
 {
-    /**
-     * @var CaseConverter
-     */
-    private $converter;
+    private CaseConverter $converter;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->converter = new CaseConverter();
     }
 
-    public function testCamelToTitleCase()
+    public function unsupportedProvider(): array
     {
-        $this->assertEquals(
-            'Title Case Format',
-            $this->converter->toTitleCase('titleCaseFormat')
+        $object = new stdClass();
+
+        return [
+            [null, null], // Unsupported value
+            [123456, 123456], // Unsupported value
+            [1.42, 1.42], // Unsupported value
+            [$object, $object], // Unsupported value
+            [[], []], // Unsupported value
+            [[123456, 1.42], [123456, 1.42]], // Array
+        ];
+    }
+
+    public function titleCaseProvider(): array
+    {
+        return [
+            ['titlecaseformat', 'Titlecaseformat'], // All lower case
+            ['TITLECASEFORMAT', 'T I T L E C A S E F O R M A T'], // All upper case
+            ['Title Case Format', 'Title Case Format'], // Title
+            ['titleCaseFormat', 'Title Case Format'], // Title
+            ['TitleCaseFormat', 'Title Case Format'], // Title
+            ['title_case_format', 'Title Case Format'], // Title
+            ['title case format', 'Title Case Format'], // Words
+            [['title case format', 'title_case_format'], ['Title Case Format', 'Title Case Format']], // Array
+        ];
+    }
+
+    public function camelCaseProvider(): array
+    {
+        return [
+            ['camelcaseformat', 'camelcaseformat'], // All lower case
+            ['CAMELCASEFORMAT', 'cAMELCASEFORMAT'], // All upper case
+            ['Camel Case Format', 'camelCaseFormat'], // Title
+            ['camelCaseFormat', 'camelCaseFormat'], // Camel
+            ['CamelCaseFormat', 'camelCaseFormat'], // Camel
+            ['camel_case_format', 'camelCaseFormat'], // Camel
+            ['camel case format', 'camelCaseFormat'], // Words
+            [['camel case format', 'camel_case_format'], ['camelCaseFormat', 'camelCaseFormat']], // Array
+        ];
+    }
+
+    public function pascalCaseProvider(): array
+    {
+        return [
+            ['pascalcaseformat', 'Pascalcaseformat'], // All lower case
+            ['PASCALCASEFORMAT', 'PASCALCASEFORMAT'], // All upper case
+            ['Pascal Case Format', 'PascalCaseFormat'], // Title
+            ['pascalCaseFormat', 'PascalCaseFormat'], // Camel
+            ['PascalCaseFormat', 'PascalCaseFormat'], // Pascal
+            ['pascal_case_format', 'PascalCaseFormat'], // Underscore
+            ['pascal case format', 'PascalCaseFormat'], // Words
+            [['pascal case format', 'pascal_case_format'], ['PascalCaseFormat', 'PascalCaseFormat']], // Array
+        ];
+    }
+
+    public function underscoreCaseProvider(): array
+    {
+        return [
+            ['underscorecaseformat', 'underscorecaseformat'], // All lower case
+            ['UNDERSCORECASEFORMAT', 'u_n_d_e_r_s_c_o_r_e_c_a_s_e_f_o_r_m_a_t'], // All upper case
+            ['Underscore Case Format', 'underscore_case_format'], // Title
+            ['underscoreCaseFormat', 'underscore_case_format'], // Camel
+            ['UnderscoreCaseFormat', 'underscore_case_format'], // Underscore
+            ['underscore_case_format', 'underscore_case_format'], // Underscore
+            ['underscore case format', 'underscore_case_format'], // Words
+            [['underscore case format', 'underscore_case_format'], ['underscore_case_format', 'underscore_case_format']], // Array
+        ];
+    }
+
+    /**
+     * @dataProvider unsupportedProvider
+     * @dataProvider titleCaseProvider
+     */
+    public function testToTitleCase($source, $expected): void
+    {
+        $this->assertSame(
+            $expected,
+            $this->converter->toTitleCase($source)
         );
     }
 
-    public function testPascalToTitleCase()
+    /**
+     * @dataProvider unsupportedProvider
+     * @dataProvider camelCaseProvider
+     */
+    public function testToCamelCase($source, $expected): void
     {
-        $this->assertEquals(
-            'Title Case Format',
-            $this->converter->toTitleCase('TitleCaseFormat')
+        $this->assertSame(
+            $expected,
+            $this->converter->toCamelCase($source)
         );
     }
 
-    public function testUnderscoreToTitleCase()
+    /**
+     * @dataProvider unsupportedProvider
+     * @dataProvider pascalCaseProvider
+     */
+    public function testToPascalCase($source, $expected): void
     {
-        $this->assertEquals(
-            'Title Case Format',
-            $this->converter->toTitleCase('title_case_format')
+        $this->assertSame(
+            $expected,
+            $this->converter->toPascalCase($source)
         );
     }
 
-    public function testLcTitleToTitleCase()
+    /**
+     * @dataProvider unsupportedProvider
+     * @dataProvider underscoreCaseProvider
+     */
+    public function testToUnderscoreCase($source, $expected): void
     {
-        $this->assertEquals(
-            'Title Case Format',
-            $this->converter->toTitleCase('title case format')
-        );
-    }
-
-    public function testTitleToTitleCase()
-    {
-        $this->assertEquals(
-            'Title Case Format',
-            $this->converter->toTitleCase('Title Case Format')
-        );
-    }
-
-    public function testTitleToCamelCase()
-    {
-        $this->assertEquals(
-            'titleCaseFormat',
-            $this->converter->toCamelCase('Title Case Format')
-        );
-    }
-
-    public function testPascalToCamelCase()
-    {
-        $this->assertEquals(
-            'titleCaseFormat',
-            $this->converter->toCamelCase('TitleCaseFormat')
-        );
-    }
-
-    public function testUnderscoreToCamelCase()
-    {
-        $this->assertEquals(
-            'titleCaseFormat',
-            $this->converter->toCamelCase('title_case_format')
-        );
-    }
-
-    public function testwordsToCamelCase()
-    {
-        $this->assertEquals(
-            'titleCaseFormat',
-            $this->converter->toCamelCase('title case format')
-        );
-    }
-
-    public function testTitleToPascalCase()
-    {
-        $this->assertEquals(
-            'PascalCaseFormat',
-            $this->converter->toPascalCase('Pascal Case Format')
-        );
-    }
-
-    public function testCamelToPascalCase()
-    {
-        $this->assertEquals(
-            'PascalCaseFormat',
-            $this->converter->toPascalCase('pascalCaseFormat')
-        );
-    }
-
-    public function testUnderscoreToPascalCase()
-    {
-        $this->assertEquals(
-            'PascalCaseFormat',
-            $this->converter->toPascalCase('pascal_case_format')
-        );
-    }
-
-    public function testWordsToPascalCase()
-    {
-        $this->assertEquals(
-            'PascalCaseFormat',
-            $this->converter->toPascalCase('pascal case format')
-        );
-    }
-
-    public function testTitleToUnderscoreCase()
-    {
-        $this->assertEquals(
-            'underscore_case_format',
-            $this->converter->toUnderscoreCase('Underscore Case Format')
-        );
-    }
-
-    public function testPascalToUnderscoreCase()
-    {
-        $this->assertEquals(
-            'underscore_case_format',
-            $this->converter->toUnderscoreCase('UnderscoreCaseFormat')
-        );
-    }
-
-    public function testCamelToUnderscoreCase()
-    {
-        $this->assertEquals(
-            'underscore_case_format',
-            $this->converter->toUnderscoreCase('underscoreCaseFormat')
+        $this->assertSame(
+            $expected,
+            $this->converter->toUnderscoreCase($source)
         );
     }
 
     public function testConvert()
     {
-        $this->assertEquals(
+        $this->assertSame(
             'underscore_case_format',
             $this->converter->convert('underscoreCaseFormat', 'underscore')
         );
-        $this->assertEquals(
+        $this->assertSame(
             'camelCaseFormat',
             $this->converter->convert('camel Case Format', 'camel')
         );
-        $this->assertEquals(
+        $this->assertSame(
             'PascalCaseFormat',
             $this->converter->convert('pascal_case_format', 'pascal')
         );
-        $this->assertEquals(
+        $this->assertSame(
             'Title Case Format',
             $this->converter->convert('title case format', 'title')
         );
@@ -172,7 +160,7 @@ class CaseConverterTest extends PHPUnit_Framework_TestCase
 
     public function testArrayArguments(): void
     {
-        $this->assertEquals(
+        $this->assertSame(
             [
                 'foo' => 'Title Case Format1',
                 'bar' => [
@@ -193,7 +181,7 @@ class CaseConverterTest extends PHPUnit_Framework_TestCase
                 'title'
             )
         );
-        $this->assertEquals(
+        $this->assertSame(
             [
                 'foo' => 'underscore_case_format1',
                 'bar' => [
@@ -212,7 +200,7 @@ class CaseConverterTest extends PHPUnit_Framework_TestCase
                 'underscore'
             )
         );
-        $this->assertEquals(
+        $this->assertSame(
             [
                 'foo' => 'camelCaseFormat1',
                 'bar' => [
@@ -231,7 +219,7 @@ class CaseConverterTest extends PHPUnit_Framework_TestCase
                 'camel'
             )
         );
-        $this->assertEquals(
+        $this->assertSame(
             [
                 'foo' => 'PascalCaseFormat1',
                 'bar' => [
@@ -256,22 +244,22 @@ class CaseConverterTest extends PHPUnit_Framework_TestCase
 
     public function testGetFormat()
     {
-        $this->assertEquals(
+        $this->assertSame(
             'underscore',
             $this->converter->getFormat('underscore_case_format')
         );
 
-        $this->assertEquals(
+        $this->assertSame(
             'camel',
             $this->converter->getFormat('camelCaseFormat')
         );
 
-        $this->assertEquals(
+        $this->assertSame(
             'pascal',
             $this->converter->getFormat('PascalCaseFormat')
         );
 
-        $this->assertEquals(
+        $this->assertSame(
             'title',
             $this->converter->getFormat('Title Case Format')
         );

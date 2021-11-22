@@ -1,0 +1,10 @@
+--TEST--
+"title" filter
+--TEMPLATE--
+{{ 'TITLECASEFORMAT'|title }}
+{{ 'titleCaseFormat'|title }}
+--DATA--
+return [];
+--EXPECT--
+T I T L E C A S E F O R M A T
+Title Case Format

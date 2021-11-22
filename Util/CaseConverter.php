@@ -191,7 +191,16 @@ class CaseConverter
      */
     private function convertToUnderscoreCase(string $input): string
     {
-        $input = lcfirst(trim($input));
+        $input = ucfirst(trim($input));
+
+        // lowercase title
+        $input = preg_replace_callback(
+            '/ ([a-z])/',
+            static function ($c) {
+                return ' '.ucfirst($c[1]);
+            },
+            $input
+        );
 
         // camel case
         $input = preg_replace_callback(
@@ -205,7 +214,7 @@ class CaseConverter
         // title case
         $input = str_replace(' ', '', $input);
 
-        return $input;
+        return ltrim($input, '_');
     }
 
     /**

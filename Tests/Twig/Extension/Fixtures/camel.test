@@ -1,0 +1,10 @@
+--TEST--
+"camel" filter
+--TEMPLATE--
+{{ 'CAMELCASEFORMAT'|camel }}
+{{ 'Camel Case Format'|camel }}
+--DATA--
+return [];
+--EXPECT--
+cAMELCASEFORMAT
+camelCaseFormat

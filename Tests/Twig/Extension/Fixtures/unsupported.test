@@ -1,0 +1,30 @@
+--TEST--
+filter unsupported values
+--TEMPLATE--
+{{ null|title }}
+{{ 1|title }}
+{{ 1.42|title }}
+{{ null|camel }}
+{{ 1|camel }}
+{{ 1.42|camel }}
+{{ null|pascal }}
+{{ 1|pascal }}
+{{ 1.42|pascal }}
+{{ null|underscore }}
+{{ 1|underscore }}
+{{ 1.42|underscore }}
+--DATA--
+return [];
+--EXPECT--
+
+1
+1.42
+
+1
+1.42
+
+1
+1.42
+
+1
+1.42

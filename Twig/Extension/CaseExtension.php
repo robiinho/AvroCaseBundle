@@ -8,19 +8,18 @@
 namespace Avro\CaseBundle\Twig\Extension;
 
 use Avro\CaseBundle\Util\CaseConverter;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 
 /**
  * Twig extension for case conversion.
  *
  * @author Joris de Wit <joris.w.dewit@gmail.com>
  */
-class CaseExtension extends \Twig_Extension
+class CaseExtension extends AbstractExtension
 {
-    protected $caseConverter;
+    protected CaseConverter $caseConverter;
 
-    /**
-     * @param CaseConverter $caseConverter
-     */
     public function __construct(CaseConverter $caseConverter)
     {
         $this->caseConverter = $caseConverter;
@@ -28,25 +27,23 @@ class CaseExtension extends \Twig_Extension
 
     /**
      * Get twig filters.
-     *
-     * @return array filters
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
-            new \Twig_SimpleFilter('camel', [$this, 'toCamelCase']),
-            new \Twig_SimpleFilter('pascal', [$this, 'toPascalCase']),
-            new \Twig_SimpleFilter('underscore', [$this, 'toUnderscoreCase']),
-            new \Twig_SimpleFilter('title', [$this, 'toTitleCase']),
+            new TwigFilter('camel', [$this, 'toCamelCase']),
+            new TwigFilter('pascal', [$this, 'toPascalCase']),
+            new TwigFilter('underscore', [$this, 'toUnderscoreCase']),
+            new TwigFilter('title', [$this, 'toTitleCase']),
         ];
     }
 
     /**
      * Convert string to camel case format.
      *
-     * @param string $input
+     * @param string|array|null $input
      *
-     * @return string In camel case
+     * @return string|array|null In camel case
      */
     public function toCamelCase($input)
     {
@@ -56,9 +53,9 @@ class CaseExtension extends \Twig_Extension
     /**
      * Convert string to pascal case format.
      *
-     * @param string $input
+     * @param string|array|null $input
      *
-     * @return string In pascal case
+     * @return string|array|null In pascal case
      */
     public function toPascalCase($input)
     {
@@ -68,9 +65,9 @@ class CaseExtension extends \Twig_Extension
     /**
      * Convert string to underscore case format.
      *
-     * @param string $input
+     * @param string|array|null $input
      *
-     * @return string In underscore case
+     * @return string|array|null In underscore case
      */
     public function toUnderscoreCase($input)
     {
@@ -80,9 +77,9 @@ class CaseExtension extends \Twig_Extension
     /**
      * Convert string to title case format.
      *
-     * @param string $input
+     * @param string|array|null $input
      *
-     * @return string In title case
+     * @return string|array|null In title case
      */
     public function toTitleCase($input)
     {
@@ -91,10 +88,8 @@ class CaseExtension extends \Twig_Extension
 
     /**
      * Get twig extension name.
-     *
-     * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return 'CaseExtension';
     }
