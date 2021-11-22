@@ -19,11 +19,6 @@
         }
     ],
     "minimum-stability": "dev",
-    "extra": {
-        "branch-alias": {
-            "dev-master": "0.4-dev"
-        }
-    },
     "require": {
         "php": ">=7.4",
         "twig/twig": "^2.10 || ^3.0"
