@@ -4,7 +4,7 @@ Convert strings or strings in arrays to different case formats.
 
 Supports: camelCase, PascalCase, Title Case, and underscore_case.
 
-This is a fork of jdewits [original code](https://github.com/jdewit/bootstrap-confirmation).
+This is a fork of jdewits [original code](https://github.com/jdewit/AvroCaseBundle).
 
 Installation
 ------------
