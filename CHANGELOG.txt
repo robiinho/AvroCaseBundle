@@ -4,6 +4,7 @@ CHANGELOG
 1.x
 ---
 
+ * Exclude Twig versions causing errors
  * Fix GH action PHPUnit step
  * Update GH action config
  * Update supported Symfony versions
