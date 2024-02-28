@@ -2,3 +2,6 @@ CHANGELOG
 =========
 
 1.x
+---
+
+ * Update supported Symfony versions
