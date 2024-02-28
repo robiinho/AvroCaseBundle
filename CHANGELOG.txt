@@ -4,4 +4,5 @@ CHANGELOG
 1.x
 ---
 
+ * Update GH action config
  * Update supported Symfony versions
