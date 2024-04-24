@@ -26,7 +26,7 @@ class AvroCaseExtension extends Extension
      * @param array            $configs   Config array
      * @param ContainerBuilder $container The container builder
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $processor = new Processor();
         $configuration = new Configuration();
