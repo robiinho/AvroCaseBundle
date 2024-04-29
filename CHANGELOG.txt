@@ -6,6 +6,11 @@ CHANGELOG
 
  *
 
+1.1.1
+-----
+
+ * Fix a Symfony return type deprecation
+
 1.1.0
 -----
 
